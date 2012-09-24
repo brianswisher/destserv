@@ -1,1 +1,34 @@
 @import "compass_twitter_bootstrap";
+
+body {
+	background-color: #ededed;
+}
+#destinations {
+	$padTop: 4px;
+	$padSides: 6px;
+	$fieldHeight: 30px;
+	$opacityOff: .001;
+	$fieldBorderRad: 4px;
+	$fieldBorderSty: 1px solid #ccc;
+	$rootMargin: 10px;
+	$androidInputMargin: 20px;
+	$inputBorderRadius: 10px;
+
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-focus-ring-color: rgba(0, 0, 0, 0);	
+    -webkit-appearance: none;
+
+    padding-top: $rootMargin;
+
+    label {
+		margin-left: $rootMargin;
+		display: inline-block;	
+	}
+	.input {
+		display: inline-block;
+		padding: $padTop $padSides;
+		border-radius: $fieldBorderRad;
+		border: $fieldBorderSty;
+		background-color: white;
+	}    
+}
