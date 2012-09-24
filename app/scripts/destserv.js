@@ -8,6 +8,10 @@ var destservApp = angular.module('destservApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/default', {
+        templateUrl: 'views/default.html',
+        controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
