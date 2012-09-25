@@ -65,12 +65,13 @@ destservApp.controller('MainCtrl', function($scope, $http) {
             document.forms['destinations'].field.blur();
             $scope.layer.state = 'off';
             $scope.form.update($scope.layer.search.term);
-            // e.stopPropagation();
         },
         doClear: function() {
             clearTimeout($scope.layer.search.timeout);
             $scope.layer.search.filter           = '';
             $scope.layer.search.results.raw      = [];
+            $scope.layer.search.results.filtered = [];
+            $scope.layer.search.results.capped   = [];
         },
         doSearch: function(url) {
             clearTimeout($scope.layer.search.timeout);
@@ -123,6 +124,7 @@ destservApp.controller('MainCtrl', function($scope, $http) {
     $scope.layer.search.placeholder = target.getAttribute('data-placeholder-layer');
     $scope.layer.copy.cancel        = target.getAttribute('data-copy-cancel');
     $scope.layer.search.term        = $scope.form.value;
+    $scope.form.update($scope.form.value || $scope.form.placeholder);
 
     $scope.$watch('layer.search.term', function() {
         $scope.layer.search.hasTerm = $scope.layer.search.term !== null && $scope.layer.search.term !== '';
