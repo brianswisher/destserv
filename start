@@ -1,10 +1,15 @@
 #!/bin/sh
 export DONT_KNOW="Sorry, don't know about";
-export WHAT="node, compass, or coffee"        
+export WHAT="npm, node, compass, or coffee"        
 
 function dont_know {
     echo "$DONT_KNOW '$1'.";
     exit 1;
+}
+
+function do_npm {    
+    npm install;
+    exit 1; 
 }
 
 function do_node {    
@@ -25,6 +30,8 @@ function do_coffee {
 function do_what {
     read -p "$WHAT? " a
     case "$a" in
+        npm)     do_npm;
+                  ;;
         node)     do_node;
                   ;;
         compass)  do_compass;
