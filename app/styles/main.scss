@@ -30,5 +30,61 @@ body {
 		border-radius: $fieldBorderRad;
 		border: $fieldBorderSty;
 		background-color: white;
-	}    
+	}  
+	form {
+		position: relative;
+		margin-top: ($fieldHeight + $rootMargin) * -1;
+		&[data-state="off"] {
+			opacity: $opacityOff;
+		}
+		&[data-state="on"] {}
+		header {
+			@extend .clearfix;
+			padding-top: $rootMargin;
+			padding-left: $rootMargin;
+			background-color: black;
+			.cap {
+				@include border-left-radius($inputBorderRadius);
+				@include border-right-radius(0);
+				display: inline-block;
+				float: left;
+				width: 10px;
+				background-color: white;					
+				padding: $padTop 0;
+				border: $fieldBorderSty;
+				border-color: white;
+			}
+			input {
+				-webkit-appearance: none;
+				width: 45%;
+				border-radius: 0;
+				float: left;
+				padding-left: 0;
+				border-color: white;
+				&:focus {
+					@include box-shadow(none);
+					border-color: white;
+				};
+			}
+			.clear {
+				@include border-left-radius(0);
+				@include border-right-radius($inputBorderRadius);
+				float: left;
+				display: inline-block;
+				padding: $padTop - 1px $padSides $padTop + 1px;
+				border: $fieldBorderSty;
+				border-color: white;
+				border-left: 0;
+				background-color: white;
+				img {
+					margin-left: $androidInputMargin;
+				}
+			}
+			.cancel {
+				@extend .btn;
+				margin-right: $rootMargin;
+				float: right;
+			}
+		}	
+	}  
 }

@@ -3,3 +3,24 @@
 <input 	type="hidden" 
 		name="location"
 		value="Use current location">
+<form   name="destinations" 
+        data-state="{{layer.state}}"
+        ng-submit="layer.submit($event)">
+    <header ng-click="layer.click($event)"
+            data-ui="header">
+        <b  class="cap"
+            data-ui="cap">&nbsp;</b><input 
+            type="text" 
+            autocomplete="off" 
+            autocorrect="off"
+            name="field"
+            data-ui="field"> 
+        <b  class="clear"
+            data-ui="clear">
+                <img data-ui="clear"
+                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHRJREFUOMtjYMAE8UC8H4j/o+H9UDmcQB6Iz2PRiI7PQ9ViaH5PhGYYfo9uyHkSNCO7BO5ndNPrsWiox+JKcJjsx6IQ3WBY4NVjCViszotHMiQeh0thGKcf49Gi9j9dDSDJCxQHIsXRSHFCokpSpjgzkZ2dAQsvtS3sTjrFAAAAAElFTkSuQmCC">
+            </b>
+        <b  class="cancel"
+            data-ui="cancel">{{layer.copy.cancel}}</b>
+    </header>
+<form>
