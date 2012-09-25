@@ -23,15 +23,29 @@
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <div id="viewporter">
+        <!-- Add your site or application content here -->        
+        <div id="viewporter">            
             <div    id="destinations"
                     data-placeholder="Use current location"
                     data-placeholder-layer="Airport, city, or zip"
-                    data-value=""
+                    data-value="san"
                     data-copy-cancel="cancel"
+                    data-input-id="location"
                     ng-view
                     ng-cloak>
+            </div>     
+            <form action="">
+                <input  type="hidden" 
+                        name="location"
+                        id="location"
+                        value="">
+                <input name="startDate" class="start hasDatepicker" type="hidden" value="10/20/2012">
+                <input name="endDate" class="start hasDatepicker" type="hidden" value="10/21/2012">
+                <input name="numRooms" class="start hasDatepicker" type="hidden" value="1">
+                <input name="numAdults" class="start hasDatepicker" type="hidden" value="2">
+                <input name="numChildren" class="start hasDatepicker" type="hidden" value="0">
+                <button style="margin: 10px;">search</button>
+            </form>               
         </div>
 
         <script src="scripts/vendor/jquery.min.js"></script>

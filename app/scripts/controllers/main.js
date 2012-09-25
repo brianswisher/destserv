@@ -2,11 +2,13 @@
 
 destservApp.controller('MainCtrl', function($scope, $http) {
     $scope.form = {
-        id: 'destinations',
+        id: 'destinations',        
         placeholder: '',
         value: null,
+        inputId: null,
         update: function(val) {
             $scope.form.value = val;
+            $('#'+$scope.form.inputId)[0].value = val;
         }
     };
     $scope.layer = {
@@ -114,12 +116,13 @@ destservApp.controller('MainCtrl', function($scope, $http) {
             timeout: null
         }
     };
-    var target               = $('#' + $scope.form.id)[0];
+    var target                      = $('#' + $scope.form.id)[0];
+    $scope.form.placeholder         = target.getAttribute('data-placeholder');
+    $scope.form.inputId             = target.getAttribute('data-input-id');
     $scope.form.update(target.getAttribute('data-value'));
-    $scope.form.placeholder  = target.getAttribute('data-placeholder');
     $scope.layer.search.placeholder = target.getAttribute('data-placeholder-layer');
-    $scope.layer.copy.cancel = target.getAttribute('data-copy-cancel');
-    $scope.layer.search.term  = $scope.form.value;
+    $scope.layer.copy.cancel        = target.getAttribute('data-copy-cancel');
+    $scope.layer.search.term        = $scope.form.value;
 
     $scope.$watch('layer.search.term', function() {
         $scope.layer.search.hasTerm = $scope.layer.search.term !== null && $scope.layer.search.term !== '';

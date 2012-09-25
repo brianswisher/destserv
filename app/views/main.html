@@ -1,8 +1,5 @@
 <label>Location</label>
 <span class="input">{{form.value || form.placeholder}}</span>
-<input 	type="hidden" 
-		name="location"
-		value="Use current location">
 <form   name="destinations" 
         data-state="{{layer.state}}"
         ng-submit="layer.submit($event)">
