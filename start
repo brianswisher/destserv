@@ -1,0 +1,45 @@
+#!/bin/sh
+export DONT_KNOW="Sorry, don't know about";
+export WHAT="node, compass, or coffee"        
+
+function dont_know {
+    echo "$DONT_KNOW '$1'.";
+    exit 1;
+}
+
+function do_node {    
+    node server.js;
+    exit 1; 
+}
+
+function do_compass {    
+    compass watch;
+    exit 1; 
+}
+
+function do_coffee {    
+    coffee --watch --output app/scripts/ app/scripts/;
+    exit 1; 
+}
+
+function do_what {
+    read -p "$WHAT? " a
+    case "$a" in
+        node)     do_node;
+                  ;;
+        compass)  do_compass;
+                  ;;
+        coffee)   do_coffee;
+                  ;;
+        *)        dont_know $a;
+                  ;;
+    esac
+    exit 1;  
+}
+
+if [ -z "$1" ]
+then
+  do_what;
+else
+  type do_$1 &>/dev/null && do_$1 || dont_know $1;
+fi

@@ -1,7 +1,10 @@
-{
-  "author": "",
-  "name": "",
-  "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {}
+{  
+  "name": "destserv",  
+  "version": "0.0.1",  
+  "dependencies" : {  
+    "express" : ">=3.0.0rc4"
+  },  
+  "engine": {  
+    "node": ">=0.8.8"  
+  }  
 }
