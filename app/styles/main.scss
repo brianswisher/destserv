@@ -30,14 +30,22 @@ body {
 		border-radius: $fieldBorderRad;
 		border: $fieldBorderSty;
 		background-color: white;
+		width: 65%;
 	}  
 	form {
 		position: relative;
 		margin-top: ($fieldHeight + $rootMargin) * -1;
 		&[data-state="off"] {
 			opacity: $opacityOff;
+			.layer {
+				display: none;
+			}
 		}
-		&[data-state="on"] {}
+		&[data-state="on"] {
+			.layer {
+				display: block;
+			}
+		}
 		header {
 			@extend .clearfix;
 			padding-top: $rootMargin;
@@ -85,6 +93,24 @@ body {
 				margin-right: $rootMargin;
 				float: right;
 			}
-		}	
+		}
+		.layer {
+			height: 490px;
+			background-color: white;
+			table {
+				width: 100%;
+				td {
+					padding: 10px 0 10px 25px;
+					font-weight: bold;				
+					border-bottom: 1px solid #ccc;
+					&.location-true {
+						background: url(../images/location.png) 2px center no-repeat;
+					}
+					&.isAirport-true {
+						background: url(../images/gray.flight.icon.png) 2px center no-repeat;
+					}
+				}
+			}
+		}
 	}  
 }

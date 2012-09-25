@@ -6,14 +6,15 @@
 <form   name="destinations" 
         data-state="{{layer.state}}"
         ng-submit="layer.submit($event)">
-    <header ng-click="layer.click($event)"
+    <header ng-click="layer.clickHeader($event)"
             data-ui="header">
         <b  class="cap"
             data-ui="cap">&nbsp;</b><input 
             type="text" 
-            placeholder="{{form.placeholder}}"
+            placeholder="{{layer.placeholder}}"
             autocomplete="off" 
             autocorrect="off"
+            id="destField"
             name="field"
             data-ui="field"
             ng-model="layer.searchTerm"> 
@@ -25,4 +26,24 @@
         <b  class="cancel"
             data-ui="cancel">{{layer.copy.cancel}}</b>
     </header>
+    <div    class="layer"
+            data-ui="layer"
+            ng-click="layer.clickLayer($event)">
+        <table>
+            <tr>
+                <td data-ui="location"
+                    data-value="{{form.placeholder}}"
+                    class="location-true">
+                    {{form.placeholder}}
+                </td>
+            </tr>
+            <tr>
+                <td data-ui="city"
+                    data-value="city"
+                    class="isAirport-true">
+                    city
+                </td>
+            </tr>
+        </table>
+    </div>
 <form>
