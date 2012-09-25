@@ -11,13 +11,13 @@
         <b  class="cap"
             data-ui="cap">&nbsp;</b><input 
             type="text" 
-            placeholder="{{layer.placeholder}}"
+            placeholder="{{layer.search.placeholder}}"
             autocomplete="off" 
             autocorrect="off"
             id="destField"
             name="field"
             data-ui="field"
-            ng-model="layer.searchTerm"> 
+            ng-model="layer.search.term"> 
         <b  class="clear"
             data-ui="clear">
                 <img data-ui="clear"
@@ -37,11 +37,11 @@
                     {{form.placeholder}}
                 </td>
             </tr>
-            <tr>
+            <tr ng-repeat="city in layer.search.results.capped">
                 <td data-ui="city"
-                    data-value="city"
-                    class="isAirport-true">
-                    city
+                    data-value="{{city.v}}"
+                    class="isAirport-{{city.airportEntry}}">
+                    {{city.v}}
                 </td>
             </tr>
         </table>
