@@ -12,6 +12,7 @@ destservApp.controller('MainCtrl', function($scope) {
         copy: {
             cancel:null
         },
+        searchTerm: '',
         click: function(e){
             var target = ($scope.layer.state === 'off') ? 'show' : e.target.getAttribute('data-ui');
             switch (target){
@@ -49,8 +50,9 @@ destservApp.controller('MainCtrl', function($scope) {
             e.stopPropagation();
         }
     };
-    var target = $('#'+$scope.form.id)[0];
-    $scope.form.placeholder = target.getAttribute('data-placeholder');
-    $scope.form.value       = target.getAttribute('data-value');
+    var target = $('#'+$scope.form.id)[0];    
+    $scope.form.value        = target.getAttribute('data-value');
+    $scope.form.placeholder  = $scope.form.value || target.getAttribute('data-placeholder');
     $scope.layer.copy.cancel = target.getAttribute('data-copy-cancel');
+    $scope.layer.searchTerm  = $scope.form.value
 });
