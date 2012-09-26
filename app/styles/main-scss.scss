@@ -11,7 +11,7 @@ body {
 	$fieldBorderRad: 4px;
 	$fieldBorderSty: 1px solid #ccc;
 	$rootMargin: 10px;
-	$androidInputMargin: 20px;
+	$androidInputMargin: 30px;
 	$inputBorderRadius: 10px;
 	$headerTopMarginOverlay: ($fieldHeight + $rootMargin) * -1;
 
@@ -68,7 +68,7 @@ body {
 			}
 			input {
 				-webkit-appearance: none;
-				width: 45%;
+				width: 40%;
 				border-radius: 0;
 				float: left;
 				padding-left: 0;
@@ -83,13 +83,13 @@ body {
 				@include border-right-radius($inputBorderRadius);
 				float: left;
 				display: inline-block;
-				padding: $padTop + 1 $padSides $padTop $padSides * 4;
+				padding: $padTop + 1 $padSides $padTop $padSides + $androidInputMargin;
 				border: $fieldBorderSty;
 				border-color: white;
 				border-left: 0;
 				background-color: white;
 				margin-top: 0;
-				background-position: 25px 4px;
+				background-position: $androidInputMargin + $padSides 4px;
 			}
 			.cancel {
 				@extend .btn;
