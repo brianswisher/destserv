@@ -1,0 +1,11 @@
+@import "images";
+
+.icon-clear {
+	@include icon-clear("../images/clear_icon@2x.png",19px,19px);
+}
+.icon-location {
+	@include icon-clear("../images/location_icon@2x.png",20px,19px);
+}
+.icon-airport {
+	@include icon-clear("../images/Airport_icon@2x.png",20px,19px);
+}

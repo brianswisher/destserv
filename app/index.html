@@ -15,6 +15,10 @@
         <script src="scripts/vendor/modernizr.min.js"></script>
         <script src="scripts/vendor/viewporter.js"></script>
         <script src="scripts/vendor/underscore.min.js"></script>
+        <script>
+            if (window['matchMedia'] && window['matchMedia']("only screen and (-webkit-min-device-pixel-ratio:1.5)").matches) document.write('<link rel="stylesheet" href="images-scss_hd.css"/>');
+            else document.write('<link rel="stylesheet" href="styles/images-scss_sd.css"/>');
+        </script>
 
     </head>
     <body ng-app="destservApp">
@@ -50,11 +54,8 @@
                                 name="field"
                                 data-ui="field"
                                 ng-model="layer.search.term"> 
-                            <b  class="clear"
-                                data-ui="clear">
-                                    <img data-ui="clear"
-                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHRJREFUOMtjYMAE8UC8H4j/o+H9UDmcQB6Iz2PRiI7PQ9ViaH5PhGYYfo9uyHkSNCO7BO5ndNPrsWiox+JKcJjsx6IQ3WBY4NVjCViszotHMiQeh0thGKcf49Gi9j9dDSDJCxQHIsXRSHFCokpSpjgzkZ2dAQsvtS3sTjrFAAAAAElFTkSuQmCC">
-                                </b>
+                            <i  class="icon-clear"
+                                data-ui="clear"></i>
                             <b  class="cancel"
                                 data-ui="cancel">{{layer.copy.cancel}}</b>
                         </header>
@@ -66,6 +67,7 @@
                                     <td data-ui="location"
                                         data-value="{{form.placeholder}}"
                                         class="location-true">
+                                        <i  class="icon-location"></i>
                                         {{form.placeholder}}
                                     </td>
                                 </tr>
@@ -73,6 +75,7 @@
                                     <td data-ui="city"
                                         data-value="{{city.v}}"
                                         class="isAirport-{{city.airportEntry}}">
+                                        <i  class="icon-airport"></i>
                                         {{city.v}}
                                     </td>
                                 </tr>

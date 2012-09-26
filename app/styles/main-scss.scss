@@ -78,19 +78,18 @@ body {
 					border-color: white;
 				};
 			}
-			.clear {
+			.icon-clear {
 				@include border-left-radius(0);
 				@include border-right-radius($inputBorderRadius);
 				float: left;
 				display: inline-block;
-				padding: $padTop - 1px $padSides $padTop + 1px;
+				padding: $padTop + 1 $padSides $padTop $padSides * 4;
 				border: $fieldBorderSty;
 				border-color: white;
 				border-left: 0;
 				background-color: white;
-				img {
-					margin-left: $androidInputMargin;
-				}
+				margin-top: 0;
+				background-position: 25px 4px;
 			}
 			.cancel {
 				@extend .btn;
@@ -104,14 +103,22 @@ body {
 			table {
 				width: 100%;
 				td {
-					padding: 10px 0 10px 25px;
+					padding: 10px 0;
 					font-weight: bold;				
 					border-bottom: 1px solid #ccc;
+					i {
+						margin: 0 5px;
+						visibility: hidden;
+					}
 					&.location-true {
-						background: url(../images/location.png) 2px center no-repeat;
+						i {
+							visibility: visible;
+						}
 					}
 					&.isAirport-true {
-						background: url(../images/gray.flight.icon.png) 2px center no-repeat;
+						i {
+							visibility: visible;
+						}
 					}
 				}
 			}
