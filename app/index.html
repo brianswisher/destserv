@@ -11,7 +11,7 @@
         <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">
         <meta name="apple-mobile-web-app-capable" content="no">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="styles/main.css"/>
+        <link rel="stylesheet" href="styles/main-scss.css"/>
         <script src="scripts/vendor/modernizr.min.js"></script>
         <script src="scripts/vendor/viewporter.js"></script>
         <script src="scripts/vendor/underscore.min.js"></script>
@@ -31,10 +31,90 @@
                     data-value=""
                     data-copy-cancel="cancel"
                     data-input-id="location"
-                    ng-view
+                    ng-controller="DestServCtrl"
                     ng-cloak>
+                    <label>Location</label>
+                    <span class="input">{{form.value || form.placeholder}}</span>
+                    <form   name="destinations" 
+                            data-state="{{layer.state}}"
+                            ng-submit="layer.submit($event)">
+                        <header ng-click="layer.clickHeader($event)"
+                                data-ui="header">
+                            <b  class="cap"
+                                data-ui="cap">&nbsp;</b><input 
+                                type="text" 
+                                placeholder="{{layer.search.placeholder}}"
+                                autocomplete="off" 
+                                autocorrect="off"
+                                id="destField"
+                                name="field"
+                                data-ui="field"
+                                ng-model="layer.search.term"> 
+                            <b  class="clear"
+                                data-ui="clear">
+                                    <img data-ui="clear"
+                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHRJREFUOMtjYMAE8UC8H4j/o+H9UDmcQB6Iz2PRiI7PQ9ViaH5PhGYYfo9uyHkSNCO7BO5ndNPrsWiox+JKcJjsx6IQ3WBY4NVjCViszotHMiQeh0thGKcf49Gi9j9dDSDJCxQHIsXRSHFCokpSpjgzkZ2dAQsvtS3sTjrFAAAAAElFTkSuQmCC">
+                                </b>
+                            <b  class="cancel"
+                                data-ui="cancel">{{layer.copy.cancel}}</b>
+                        </header>
+                        <div    class="layer"
+                                data-ui="layer"
+                                ng-click="layer.clickLayer($event)">
+                            <table>
+                                <tr>
+                                    <td data-ui="location"
+                                        data-value="{{form.placeholder}}"
+                                        class="location-true">
+                                        {{form.placeholder}}
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="city in layer.search.results.capped">
+                                    <td data-ui="city"
+                                        data-value="{{city.v}}"
+                                        class="isAirport-{{city.airportEntry}}">
+                                        {{city.v}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
             </div>     
-            <form action="">
+            <form   action=""
+                    data-target="location"
+                    onsubmit="var hasGeolocation = navigator.geolocation;
+                        if(hasGeolocation){
+                            var self = this;
+                            navigator.geolocation.getCurrentPosition(function(position){
+                                    var coords = [
+                                            position.coords.latitude,
+                                            position.coords.longitude
+                                        ],
+                                        location=$('#'+self.getAttribute('data-target'))[0];
+                                    location.value=coords;
+                                    location.form.submit();
+                                },function(error){
+                                    var mssg = '';
+                                    switch(error.code)  {
+                                      case error.PERMISSION_DENIED:
+                                        mssg = 'User denied the request for Geolocation.';
+                                        break;
+                                      case error.POSITION_UNAVAILABLE:
+                                        mssg = 'Location information is unavailable.';
+                                        break;
+                                      case error.TIMEOUT:
+                                        mssg = 'The request to get user location timed out.';
+                                        break;
+                                      case error.UNKNOWN_ERROR:
+                                        mssg = 'An unknown error occurred.';
+                                        break;
+                                    }
+                                    alert(mssg);
+                                }
+                            );
+                        }
+                        return false;
+                        ">
                 <input  type="hidden" 
                         name="location"
                         id="location"
@@ -53,8 +133,7 @@
 
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/destserv.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/default.js"></script>
+        <script src="scripts/controllers/DestServCtrl.js"></script>
         <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
