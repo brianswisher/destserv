@@ -82,36 +82,42 @@
             </div>     
             <form   action=""
                     data-target="location"
+                    data-key="current location"
                     onsubmit="var hasGeolocation = navigator.geolocation;
                         if(hasGeolocation){
-                            var self = this;
-                            navigator.geolocation.getCurrentPosition(function(position){
+                            var self = this,
+                                location=$('#'+self.getAttribute('data-target'))[0],
+                                isLocSearch=location.value.indexOf(self.getAttribute('data-key'))!=-1;
+                            if(isLocSearch){
+                                navigator.geolocation.getCurrentPosition(function(position){
                                     var coords = [
                                             position.coords.latitude,
                                             position.coords.longitude
-                                        ],
-                                        location=$('#'+self.getAttribute('data-target'))[0];
-                                    location.value=coords;
-                                    location.form.submit();
-                                },function(error){
-                                    var mssg = '';
-                                    switch(error.code)  {
-                                      case error.PERMISSION_DENIED:
-                                        mssg = 'User denied the request for Geolocation.';
-                                        break;
-                                      case error.POSITION_UNAVAILABLE:
-                                        mssg = 'Location information is unavailable.';
-                                        break;
-                                      case error.TIMEOUT:
-                                        mssg = 'The request to get user location timed out.';
-                                        break;
-                                      case error.UNKNOWN_ERROR:
-                                        mssg = 'An unknown error occurred.';
-                                        break;
+                                        ]                                        
+                                        location.value=coords;
+                                        location.form.submit();
+                                    },function(error){
+                                        var mssg = '';
+                                        switch(error.code)  {
+                                          case error.PERMISSION_DENIED:
+                                            mssg = 'User denied the request for Geolocation.';
+                                            break;
+                                          case error.POSITION_UNAVAILABLE:
+                                            mssg = 'Location information is unavailable.';
+                                            break;
+                                          case error.TIMEOUT:
+                                            mssg = 'The request to get user location timed out.';
+                                            break;
+                                          case error.UNKNOWN_ERROR:
+                                            mssg = 'An unknown error occurred.';
+                                            break;
+                                        }
+                                        alert(mssg);
                                     }
-                                    alert(mssg);
-                                }
-                            );
+                                );
+                            } else {
+                                location.form.submit();
+                            }
                         }
                         return false;
                         ">
