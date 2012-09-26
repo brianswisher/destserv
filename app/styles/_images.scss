@@ -1,3 +1,5 @@
+@import "compass/css3/background-size";
+
 .img {
 	display: inline-block;
 	vertical-align: text-top;
@@ -10,5 +12,6 @@
 	width: $w;
 	height: $h;
 	line-height: $h;
-	background-image: url($url);	
+	background-image: url($url);
+	@include background-size($w $h);
 }
