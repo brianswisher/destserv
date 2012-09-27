@@ -37,12 +37,12 @@
                     data-input-id="location"
                     ng-controller="DestServCtrl">
                     <label>Location</label>
-                    <span class="input">{{form.value || form.placeholder}}</span>
+                    <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
                     <form   name="destinations" 
                             data-state="{{layer.state}}"
                             ng-submit="layer.submit($event)">
                         <header ng-click="layer.clickHeader($event)"
-                                data-ui="header">
+                                class="cloak">
                             <b  class="cap"
                                 data-ui="cap">&nbsp;</b><input 
                                 type="text" 
@@ -58,7 +58,7 @@
                             <b  class="cancel"
                                 data-ui="cancel">{{layer.copy.cancel}}</b>
                         </header>
-                        <div    class="layer"
+                        <div    class="layer cloak"
                                 data-ui="layer"
                                 ng-click="layer.clickLayer($event)">
                             <table>

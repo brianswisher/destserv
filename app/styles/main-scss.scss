@@ -22,6 +22,11 @@ body {
 
     padding-top: $rootMargin * 10;
 
+    .cloak { visibility: hidden; }
+    &.ready {
+    	.cloak { visibility: visible; }
+    }
+
     label {
 		margin-left: $rootMargin;
 		display: inline-block;	

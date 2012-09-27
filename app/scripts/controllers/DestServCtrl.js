@@ -132,6 +132,7 @@ function DestServCtrl($scope, $http) {
     $scope.layer.copy.cancel = target.getAttribute('data-copy-cancel');
     $scope.layer.search.term = $scope.form.value;
     $scope.form.update($scope.form.value || $scope.form.placeholder);
+    $(target).addClass('ready');
 
     $scope.$watch('layer.search.term', function() {
         $scope.layer.search.hasTerm = $scope.layer.search.term !== null && $scope.layer.search.term !== '';
