@@ -30,6 +30,7 @@ function DestServCtrl($scope, $http) {
             case 'show':
                 $scope.layer.show(e);
             }
+            e.preventDefault();
             e.stopPropagation();
         },
         clickLayer: function(e) {
@@ -44,21 +45,25 @@ function DestServCtrl($scope, $http) {
             default:
                 $('#' + $scope.layer.fieldId)[0].blur;
             }
+            e.preventDefault();
             e.stopPropagation();
         },
         clear: function(e) {
             document.forms['destinations'].field.focus();
             document.forms['destinations'].field.value = '';
             $scope.layer.doClear();
+            e.preventDefault();
             e.stopPropagation();
         },
         dismiss: function(e) {
             $scope.layer.state = 'off';
+            e.preventDefault();
             e.stopPropagation();
         },
         show: function(e) {
             $scope.layer.state = 'on';
             document.forms['destinations'].field.focus();
+            e.preventDefault();
             e.stopPropagation();
         },
         submit: function(e) {
