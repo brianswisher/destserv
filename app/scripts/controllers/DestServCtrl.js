@@ -59,12 +59,14 @@ function DestServCtrl($scope, $http) {
             $scope.layer.state = 'off';
             e.preventDefault();
             e.stopPropagation();
+            window.viewporter.refresh();
         },
         show: function(e) {
             $scope.layer.state = 'on';
             document.forms['destinations'].field.focus();
             e.preventDefault();
             e.stopPropagation();
+            window.viewporter.refresh();
         },
         submit: function(e) {
             document.forms['destinations'].field.blur();
