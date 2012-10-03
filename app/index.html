@@ -36,104 +36,64 @@
                     data-copy-cancel="Cancel"
                     data-input-id="location"
                     ng-controller="DestServCtrl">
-                    <label>Location</label>
-                    <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
-                    <form   name="destinations" 
-                            data-state="{{layer.state}}"
-                            ng-submit="layer.submit($event)">
-                        <header ng-click="layer.clickHeader($event)"
-                                class="cloak">
-                            <b  class="cap"
-                                data-ui="cap">&nbsp;</b><input 
-                                type="text" 
-                                placeholder="{{layer.search.placeholder}}"
-                                autocomplete="off" 
-                                autocorrect="off"
-                                id="destField"
-                                name="field"
-                                data-ui="field"
-                                ng-model="layer.search.term"> 
-                            <i  class="icon-clear"
-                                data-ui="clear"></i>
-                            <b  class="cancel"
-                                data-ui="cancel">{{layer.copy.cancel}}</b>
-                        </header>
-                        <div    class="layer cloak"
-                                data-ui="layer"
-                                ng-click="layer.clickLayer($event)">
-                            <table>
-                                <tr>
-                                    <td data-ui="location"
-                                        data-value="{{form.placeholder}}"
-                                        class="location-true">
-                                        <i  class="icon-location"></i>
-                                        {{form.placeholder}}
-                                    </td>
-                                </tr>
-                                <tr ng-repeat="city in layer.search.results.capped">
-                                    <td data-ui="city"
-                                        data-value="{{city.v}}"
-                                        class="isAirport-{{city.airportEntry}}">
-                                        <i  class="icon-airport"></i>
-                                        {{city.v}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                    <div class="field location">
+                        <label>Location</label>
+                        <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
+                    <div>
+                    <ng:include src="'templates/destlayer.html'"></ng:include>
+                    <form   action=""
+                            data-target="location"
+                            data-key="current location"
+                            onsubmit="var hasGeolocation = navigator.geolocation;
+                                if(hasGeolocation){
+                                    var self = this,
+                                        location=$('#'+self.getAttribute('data-target'))[0],
+                                        isLocSearch=location.value.indexOf(self.getAttribute('data-key'))!=-1;
+                                    if(isLocSearch){
+                                        navigator.geolocation.getCurrentPosition(function(position){
+                                            var coords = [
+                                                    position.coords.latitude,
+                                                    position.coords.longitude
+                                                ]                                        
+                                                location.value=coords;
+                                                location.form.submit();
+                                            },function(error){
+                                                var mssg = '';
+                                                switch(error.code)  {
+                                                  case error.PERMISSION_DENIED:
+                                                    mssg = 'User denied the request for Geolocation.';
+                                                    break;
+                                                  case error.POSITION_UNAVAILABLE:
+                                                    mssg = 'Location information is unavailable.';
+                                                    break;
+                                                  case error.TIMEOUT:
+                                                    mssg = 'The request to get user location timed out.';
+                                                    break;
+                                                  case error.UNKNOWN_ERROR:
+                                                    mssg = 'An unknown error occurred.';
+                                                    break;
+                                                }
+                                                alert(mssg);
+                                            }
+                                        );
+                                    } else {
+                                        location.form.submit();
+                                    }
+                                }
+                                return false;
+                                ">
+                        <input  type="hidden" 
+                                name="location"
+                                id="location"
+                                value="">
+                        <input name="startDate" class="start hasDatepicker" type="hidden" value="10/20/2012">
+                        <input name="endDate" class="start hasDatepicker" type="hidden" value="10/21/2012">
+                        <input name="numRooms" class="start hasDatepicker" type="hidden" value="1">
+                        <input name="numAdults" class="start hasDatepicker" type="hidden" value="2">
+                        <input name="numChildren" class="start hasDatepicker" type="hidden" value="0">
+                        <button style="margin: 10px;">search</button>
                     </form>
             </div>     
-            <form   action=""
-                    data-target="location"
-                    data-key="current location"
-                    onsubmit="var hasGeolocation = navigator.geolocation;
-                        if(hasGeolocation){
-                            var self = this,
-                                location=$('#'+self.getAttribute('data-target'))[0],
-                                isLocSearch=location.value.indexOf(self.getAttribute('data-key'))!=-1;
-                            if(isLocSearch){
-                                navigator.geolocation.getCurrentPosition(function(position){
-                                    var coords = [
-                                            position.coords.latitude,
-                                            position.coords.longitude
-                                        ]                                        
-                                        location.value=coords;
-                                        location.form.submit();
-                                    },function(error){
-                                        var mssg = '';
-                                        switch(error.code)  {
-                                          case error.PERMISSION_DENIED:
-                                            mssg = 'User denied the request for Geolocation.';
-                                            break;
-                                          case error.POSITION_UNAVAILABLE:
-                                            mssg = 'Location information is unavailable.';
-                                            break;
-                                          case error.TIMEOUT:
-                                            mssg = 'The request to get user location timed out.';
-                                            break;
-                                          case error.UNKNOWN_ERROR:
-                                            mssg = 'An unknown error occurred.';
-                                            break;
-                                        }
-                                        alert(mssg);
-                                    }
-                                );
-                            } else {
-                                location.form.submit();
-                            }
-                        }
-                        return false;
-                        ">
-                <input  type="hidden" 
-                        name="location"
-                        id="location"
-                        value="">
-                <input name="startDate" class="start hasDatepicker" type="hidden" value="10/20/2012">
-                <input name="endDate" class="start hasDatepicker" type="hidden" value="10/21/2012">
-                <input name="numRooms" class="start hasDatepicker" type="hidden" value="1">
-                <input name="numAdults" class="start hasDatepicker" type="hidden" value="2">
-                <input name="numChildren" class="start hasDatepicker" type="hidden" value="0">
-                <button style="margin: 10px;">search</button>
-            </form>               
         </div>
 
         <script src="scripts/vendor/jquery.min.js"></script>

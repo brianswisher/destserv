@@ -27,119 +27,126 @@ body {
     	.cloak { visibility: visible; }
     }
 
-    label {
-		margin-left: $rootMargin;
-		display: inline-block;	
-	}
-	.input {
-		display: inline-block;
-		padding: $padTop $padSides;
-		border-radius: $fieldBorderRad;
-		border: $fieldBorderSty;
-		background-color: white;
-		width: 65%;
-	}  
-	form {
-		position: absolute;
-		width: 100%;
-		margin-top: $headerTopMarginOverlay;
-		&[data-state="off"] {
-			opacity: $opacityOff;
-			.layer {
-				display: none;
+	.location {
+		&.field {
+			label {
+				margin-left: $rootMargin;
+				display: inline-block;	
 			}
-		}
-		&[data-state="on"] {
-			margin-top: 0;
-			top: 0;
-			.layer {
-				display: block;
-			}
-		}
-		header {
-			@extend .clearfix;
-			padding-top: $rootMargin;
-			padding-left: $rootMargin;
-			background-color: black;
-			@include background-image(linear-gradient( color-stops(rgb(101,101,101) 0%, rgb(76,76,76) 50%, rgb(50,50,50) 50%, rgb(78,78,78) 100%) ));
-			.cap {
-				@include border-left-radius($inputBorderRadius);
-				@include border-right-radius(0);
+			.input {
 				display: inline-block;
-				float: left;
-				width: 10px;
-				background-color: white;					
-				padding: $padTop 0;
+				padding: $padTop $padSides;
+				border-radius: $fieldBorderRad;
 				border: $fieldBorderSty;
-				border-color: white;
-			}
-			input {
-				-webkit-appearance: none;
-				-webkit-user-modify: read-write-plaintext-only;
-				-webkit-tap-highlight-color:rgba(0,0,0,0);
-				width: 40%;
-				border-radius: 0;
-				float: left;
-				padding-left: 0;
-				border-color: white;
-				&:focus {
-					@include box-shadow(none);
-					border-color: white;
-				};
-			}
-			.icon-clear {
-				@include border-left-radius(0);
-				@include border-right-radius($inputBorderRadius);
-				float: left;
-				display: inline-block;
-				padding: $padTop + 1 $padSides $padTop $padSides + $androidInputMargin;
-				border: $fieldBorderSty;
-				border-color: white;
-				border-left: 0;
 				background-color: white;
-				margin-top: 0;
-				background-position: $androidInputMargin + $padSides 4px;
+				width: 65%;
 			}
-			.cancel {
-				padding: 5px 10px;
-				@include text-shadow(0 -2px 0 rgba(0,0,0,.75));
-				@include box-shadow(inset 0 1px 0 rgba(255,255,255,.75), 0 1px 0 rgba(255,255,255,.75));
-				border: 1px solid black;
-				border-radius: 5px;
-				font-size: 14px;
-				color: white;
-				margin-right: $rootMargin;
-				margin-top: -1px;
-				float: right;
-			}
-			padding-bottom: 2px;
 		}
-		.layer {
-			height: 450px;
-			background-color: white;
-			table {
-				width: 100%;
-				td {
-					padding: 12px 0;
-					font-weight: bold;				
-					border-bottom: 1px solid #b1b1b1;
+	}
+
+	form {
+		&[name="destinations"] {
+			position: absolute;
+			width: 100%;
+			margin-top: $headerTopMarginOverlay;
+			&[data-state="off"] {
+				opacity: $opacityOff;
+				.layer {
+					display: none;
+				}
+			}
+			&[data-state="on"] {
+				margin-top: 0;
+				top: 0;
+				.layer {
+					display: block;
+				}
+			}
+			header {
+				@extend .clearfix;
+				padding-top: $rootMargin;
+				padding-left: $rootMargin;
+				background-color: black;
+				@include background-image(linear-gradient( color-stops(rgb(101,101,101) 0%, rgb(76,76,76) 50%, rgb(50,50,50) 50%, rgb(78,78,78) 100%) ));
+				.cap {
+					@include border-left-radius($inputBorderRadius);
+					@include border-right-radius(0);
+					display: inline-block;
+					float: left;
+					width: 10px;
+					background-color: white;					
+					padding: $padTop 0;
+					border: $fieldBorderSty;
+					border-color: white;
+				}
+				input {
+					-webkit-appearance: none;
+					-webkit-user-modify: read-write-plaintext-only;
+					-webkit-tap-highlight-color:rgba(0,0,0,0);
+					width: 40%;
+					border-radius: 0;
+					float: left;
+					padding-left: 0;
+					border-color: white;
+					&:focus {
+						@include box-shadow(none);
+						border-color: white;
+					};
+				}
+				.icon-clear {
+					@include border-left-radius(0);
+					@include border-right-radius($inputBorderRadius);
+					float: left;
+					display: inline-block;
+					padding: $padTop + 1 $padSides $padTop $padSides + $androidInputMargin;
+					border: $fieldBorderSty;
+					border-color: white;
+					border-left: 0;
 					background-color: white;
-					i {
-						margin: 0 5px;
-						visibility: hidden;
-					}
-					&.location-true {
+					margin-top: 0;
+					background-position: $androidInputMargin + $padSides 4px;
+				}
+				.cancel {
+					padding: 5px 10px;
+					@include text-shadow(0 -2px 0 rgba(0,0,0,.75));
+					@include box-shadow(inset 0 1px 0 rgba(255,255,255,.75), 0 1px 0 rgba(255,255,255,.75));
+					border: 1px solid black;
+					border-radius: 5px;
+					font-size: 14px;
+					color: white;
+					margin-right: $rootMargin;
+					margin-top: -1px;
+					float: right;
+				}
+				padding-bottom: 2px;
+			}
+			.layer {
+				height: 450px;
+				background-color: white;
+				table {
+					width: 100%;
+					td {
+						padding: 12px 0;
+						font-weight: bold;				
+						border-bottom: 1px solid #b1b1b1;
+						background-color: white;
 						i {
-							visibility: visible;
+							margin: 0 5px;
+							visibility: hidden;
 						}
-					}
-					&.isAirport-true {
-						i {
-							visibility: visible;
+						&.location-true {
+							i {
+								visibility: visible;
+							}
+						}
+						&.isAirport-true {
+							i {
+								visibility: visible;
+							}
 						}
 					}
 				}
 			}
-		}
+		}		
 	}  
 }
