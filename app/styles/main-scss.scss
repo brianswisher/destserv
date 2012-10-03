@@ -16,6 +16,7 @@ body {
 	$androidInputMargin: 30px;
 	$inputBorderRadius: 10px;
 	$headerTopMarginOverlay: $rootMargin * -1;
+	$errorColor: #C00;
 
 	// Resest if base font percentage is set to 62.5%
 	// font-size: 162.5%;
@@ -30,11 +31,32 @@ body {
     	.cloak { visibility: visible; }
     }
 
-	.location {
-		&.field {
+    .search {
+    	.errors {
+    		&.hasThem {
+    			color: $errorColor;
+	    		font-weight: bold;
+	    		margin: $rootMargin;
+	    		&:before {
+	    			@include border-radius(4px);
+	    			content: attr(title);
+	    			text-indent: $padSides/2;
+	    			display: block;
+	    			color: white;
+	    			background-color: $errorColor;
+	    			padding: $padTop/2 $padSides/2;
+	    		}
+	    		p {
+	    			padding: 0;
+	    			margin: 0;
+	    		}
+    		}
+    	}
+    	.field {
 			label {
 				margin-left: $rootMargin;
 				display: inline-block;	
+				width: 60px;
 			}
 			.input {
 				display: inline-block;
@@ -44,8 +66,9 @@ body {
 				background-color: white;
 				width: 65%;
 			}
+			margin-bottom: $rootMargin;
 		}
-	}
+    }
 
 	form {
 		&[name="destinations"] {

@@ -39,9 +39,27 @@
                  ng-app>                    
                     <ng:include src="'templates/destlayer.html'"></ng:include>
                     <form action=""
+                          class="search"
                           data-target="location"
                           data-key="current location"
-                          onsubmit="var hasGeolocation = navigator.geolocation;
+                          onsubmit="var hasGeolocation, errors, hasThem;
+                                hasGeolocation = navigator.geolocation;
+                                errors = $('.errors',this)[0];
+                                errors.innerHTML = '';
+                                hasThem = false;
+                                if(this.location.value.length<3){
+                                    errors.innerHTML += '<p>Minimum 3 characters required to perform successful search.</p>';
+                                    $(errors).addClass('hasThem');
+                                    hasThem = true;
+                                }
+                                if(new Date(this.endDate.value)<new Date(this.startDate.value)){
+                                    errors.innerHTML += '<p>Check-out date is not valid. The check-out date must be after the check-in date.</p>';
+                                    $(errors).addClass('hasThem');
+                                    hasThem = true;
+                                }
+                                if (hasThem) {
+                                    return false;
+                                }
                                 if(hasGeolocation){
                                     var self = this,
                                         location=$('#'+self.getAttribute('data-target'))[0],
@@ -79,19 +97,26 @@
                                 }
                                 return false;
                                 ">
-                        <div class="field location">
+                        <div class="field">
                             <label>Location</label>
                             <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
-                        <div>
+                        </div>
+                        <div class="errors" title="Please correct the following"></div>
                         <input type="hidden" 
                                name="location"
                                id="location"
                                value="">
-                        <input name="startDate" class="start hasDatepicker" type="hidden" value="10/20/2012">
-                        <input name="endDate" class="start hasDatepicker" type="hidden" value="10/21/2012">
-                        <input name="numRooms" class="start hasDatepicker" type="hidden" value="1">
-                        <input name="numAdults" class="start hasDatepicker" type="hidden" value="2">
-                        <input name="numChildren" class="start hasDatepicker" type="hidden" value="0">
+                        <div class="field">
+                            <label>Start</label>
+                            <input class="input" name="startDate" type="text" value="10/20/2012">
+                        </div>
+                        <div class="field">
+                            <label>End</label>
+                            <input class="input" name="endDate" type="text" value="10/21/2012">
+                        </div>
+                        <input name="numRooms" type="hidden" value="1">
+                        <input name="numAdults" type="hidden" value="2">
+                        <input name="numChildren" type="hidden" value="0">
                         <button style="margin: 10px;">search</button>
                     </form>
             </div>     
