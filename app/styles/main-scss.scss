@@ -3,8 +3,9 @@
 
 body {
 	background-color: #ededed;
+	// font-size: 62.5%;
 }
-#destinations {
+.destinations {
 	$padTop: 4px;
 	$padSides: 6px;
 	$fieldHeight: 30px;
@@ -14,8 +15,10 @@ body {
 	$rootMargin: 10px;
 	$androidInputMargin: 30px;
 	$inputBorderRadius: 10px;
-	$headerTopMarginOverlay: ($fieldHeight + $rootMargin) * -1;
+	$headerTopMarginOverlay: $rootMargin * -1;
 
+	// Resest if base font percentage is set to 62.5%
+	// font-size: 162.5%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-focus-ring-color: rgba(0, 0, 0, 0);	
     -webkit-appearance: none;

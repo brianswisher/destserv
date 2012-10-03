@@ -1,8 +1,7 @@
 'use strict';
 
-function DestServCtrl($scope, $http) {
+function DestServCtrl($scope, $http, $rootElement) {
     $scope.form = {
-        id: 'destinations',
         placeholder: '',
         value: null,
         inputId: null,
@@ -124,15 +123,17 @@ function DestServCtrl($scope, $http) {
             timeout: null
         }
     };
-    var target = $('#' + $scope.form.id)[0];
-    $scope.form.placeholder = target.getAttribute('data-placeholder');
-    $scope.form.inputId = target.getAttribute('data-input-id');
-    $scope.form.update(target.getAttribute('data-value'));
-    $scope.layer.search.placeholder = target.getAttribute('data-placeholder-layer');
-    $scope.layer.copy.cancel = target.getAttribute('data-copy-cancel');
-    $scope.layer.search.term = $scope.form.value;
-    $scope.form.update($scope.form.value || $scope.form.placeholder);
-    $(target).addClass('ready');
+
+    $.each( $rootElement, function(i, target) { 
+        $scope.form.placeholder = target.getAttribute('data-placeholder');
+        $scope.form.inputId = target.getAttribute('data-input-id');
+        $scope.form.update(target.getAttribute('data-value'));
+        $scope.layer.search.placeholder = target.getAttribute('data-placeholder-layer');
+        $scope.layer.copy.cancel = target.getAttribute('data-copy-cancel');
+        $scope.layer.search.term = $scope.form.value;
+        $scope.form.update($scope.form.value || $scope.form.placeholder);
+        $(target).addClass('ready');
+    });
 
     $scope.$watch('layer.search.term', function() {
         $scope.layer.search.hasTerm = $scope.layer.search.term !== null && $scope.layer.search.term !== '';
@@ -174,4 +175,4 @@ function DestServCtrl($scope, $http) {
         $scope.layer.doFilter();
     }, true);
 }
-DestServCtrl.$inject = ['$scope', '$http'];
+DestServCtrl.$inject = ['$scope', '$http', '$rootElement'];

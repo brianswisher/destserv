@@ -21,7 +21,7 @@
         </script>
 
     </head>
-    <body ng-app="destservApp">
+    <body>
 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -29,22 +29,19 @@
 
         <!-- Add your site or application content here -->        
         <div id="viewporter">            
-            <div    id="destinations"
-                    data-placeholder="Use current location"
-                    data-placeholder-layer="Airport, city, or zip"
-                    data-value=""
-                    data-copy-cancel="Cancel"
-                    data-input-id="location"
-                    ng-controller="DestServCtrl">
-                    <div class="field location">
-                        <label>Location</label>
-                        <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
-                    <div>
+            <div class="destinations"
+                 data-placeholder="Use current location"
+                 data-placeholder-layer="Airport, city, or zip"
+                 data-value=""
+                 data-copy-cancel="Cancel"
+                 data-input-id="location"
+                 ng-controller="DestServCtrl"
+                 ng-app>                    
                     <ng:include src="'templates/destlayer.html'"></ng:include>
-                    <form   action=""
-                            data-target="location"
-                            data-key="current location"
-                            onsubmit="var hasGeolocation = navigator.geolocation;
+                    <form action=""
+                          data-target="location"
+                          data-key="current location"
+                          onsubmit="var hasGeolocation = navigator.geolocation;
                                 if(hasGeolocation){
                                     var self = this,
                                         location=$('#'+self.getAttribute('data-target'))[0],
@@ -82,10 +79,14 @@
                                 }
                                 return false;
                                 ">
-                        <input  type="hidden" 
-                                name="location"
-                                id="location"
-                                value="">
+                        <div class="field location">
+                            <label>Location</label>
+                            <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
+                        <div>
+                        <input type="hidden" 
+                               name="location"
+                               id="location"
+                               value="">
                         <input name="startDate" class="start hasDatepicker" type="hidden" value="10/20/2012">
                         <input name="endDate" class="start hasDatepicker" type="hidden" value="10/21/2012">
                         <input name="numRooms" class="start hasDatepicker" type="hidden" value="1">
@@ -100,7 +101,6 @@
         <script src="scripts/vendor/angular.js"></script>
 
         <!-- build:js scripts/scripts.js -->
-        <script src="scripts/destserv.js"></script>
         <script src="scripts/controllers/DestServCtrl.js"></script>
         <!-- endbuild -->
 
