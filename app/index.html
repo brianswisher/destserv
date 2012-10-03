@@ -47,17 +47,23 @@
                                 errors = $('.errors',this)[0];
                                 errors.innerHTML = '';
                                 hasThem = false;
+                                $(errors.parentNode.parentNode).removeClass('errorEndDate');
+                                $(errors.parentNode.parentNode).removeClass('errorLocation');
+                                $(errors.parentNode.parentNode).removeClass('hasErrors');
                                 if(this.location.value.length<3){
                                     errors.innerHTML += '<p>Minimum 3 characters required to perform successful search.</p>';
                                     $(errors).addClass('hasThem');
                                     hasThem = true;
+                                    $(errors.parentNode.parentNode).addClass('errorLocation');
                                 }
-                                if(new Date(this.endDate.value)<new Date(this.startDate.value)){
+                                if(new Date(this.endDate.value)<=new Date(this.startDate.value)){
                                     errors.innerHTML += '<p>Check-out date is not valid. The check-out date must be after the check-in date.</p>';
                                     $(errors).addClass('hasThem');
                                     hasThem = true;
+                                    $(errors.parentNode.parentNode).addClass('errorEndDate');
                                 }
                                 if (hasThem) {
+                                    $(errors.parentNode.parentNode).addClass('hasErrors');
                                     return false;
                                 }
                                 if(hasGeolocation){
@@ -97,7 +103,7 @@
                                 }
                                 return false;
                                 ">
-                        <div class="field">
+                        <div class="field location">
                             <label>Location</label>
                             <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
                         </div>
@@ -106,11 +112,11 @@
                                name="location"
                                id="location"
                                value="">
-                        <div class="field">
+                        <div class="field startDate">
                             <label>Start</label>
                             <input class="input" name="startDate" type="text" value="10/20/2012">
                         </div>
-                        <div class="field">
+                        <div class="field endDate">
                             <label>End</label>
                             <input class="input" name="endDate" type="text" value="10/21/2012">
                         </div>

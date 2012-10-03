@@ -31,6 +31,35 @@ body {
     	.cloak { visibility: visible; }
     }
 
+    &.errorLocation {
+    	.search {
+    		.field {
+    			&.location {
+    				label {
+    					color: $errorColor;
+    				}
+    				.input {
+    					border-color: $errorColor;
+    				}
+    			}
+	    	}
+    	}
+    }
+    &.errorEndDate {
+    	.search {
+    		.field {
+    			&.endDate {
+    				label {
+    					color: $errorColor;
+    				}
+    				input {
+    					border-color: $errorColor;
+    				}
+    			}
+	    	}
+    	}
+    }
+
     .search {
     	.errors {
     		&.hasThem {
@@ -59,6 +88,9 @@ body {
 				width: 60px;
 			}
 			.input {
+				&:focus {
+					@include box-shadow(none);
+				}
 				display: inline-block;
 				padding: $padTop $padSides;
 				border-radius: $fieldBorderRad;
