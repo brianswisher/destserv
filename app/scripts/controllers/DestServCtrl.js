@@ -189,11 +189,9 @@ function DestServCtrl($scope, $http, $rootElement) {
                     $scope.layer.position('on');
                 }
             }
-            $scope.defer(function(){
-                if ( window['viewporter'] ) {
-                    window.viewporter.refresh();
-                }   
-            });
+            if ( window['viewporter'] ) {
+                window.viewporter.refresh();
+            } 
         },
         submit: function(e) {
             $scope.layer.form.field.blur();
