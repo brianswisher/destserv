@@ -1,43 +1,39 @@
-<form   name="destinations" 
-        data-state="{{layer.state}}"
-        ng-submit="layer.submit($event)">
-    <header ng-click="layer.clickHeader($event)"
-            class="cloak">
-        <b  class="cap"
-            data-ui="cap">&nbsp;</b><input 
-            type="text" 
-            placeholder="{{layer.search.placeholder}}"
-            autocomplete="off" 
-            autocorrect="off"
-            id="destField"
-            name="field"
-            data-ui="field"
-            ng-model="layer.search.term"> 
-        <i  class="icon-clear"
-            data-ui="clear"></i>
-        <b  class="cancel"
-            data-ui="cancel">{{layer.copy.cancel}}</b>
-    </header>
-    <div    class="layer cloak"
-            data-ui="layer"
-            ng-click="layer.clickLayer($event)">
-        <table>
-            <tr>
-                <td data-ui="location"
-                    data-value="{{form.placeholder}}"
-                    class="location-true">
-                    <i  class="icon-location"></i>
-                    {{form.placeholder}}
-                </td>
-            </tr>
-            <tr ng-repeat="city in layer.search.results.capped">
-                <td data-ui="city"
-                    data-value="{{city.v}}"
-                    class="isAirport-{{city.airportEntry}}">
-                    <i  class="icon-airport"></i>
-                    {{city.v}}
-                </td>
-            </tr>
-        </table>
-    </div>
-</form>
+<header ng-click="layer.clickHeader($event)"
+        class="cloak">
+    <b  class="cap"
+        data-ui="cap">&nbsp;</b><input 
+        type="text" 
+        placeholder="{{layer.search.placeholder}}"
+        autocomplete="off" 
+        autocorrect="off"
+        id="destField"
+        name="field"
+        data-ui="field"
+        ng-model="layer.search.term"> 
+    <i  class="icon-clear"
+        data-ui="clear"></i>
+    <b  class="cancel"
+        data-ui="cancel">{{layer.copy.cancel}}</b>
+</header>
+<div    class="layer cloak"
+        data-ui="layer"
+        ng-click="layer.clickLayer($event)">
+    <table>
+        <tr>
+            <td data-ui="location"
+                data-value="{{form.placeholder}}"
+                class="location-true">
+                <i  class="icon-location"></i>
+                {{form.placeholder}}
+            </td>
+        </tr>
+        <tr ng-repeat="city in layer.search.results.capped">
+            <td data-ui="city"
+                data-value="{{city.v}}"
+                class="isAirport-{{city.airportEntry}}">
+                <i  class="icon-airport"></i>
+                {{city.v}}
+            </td>
+        </tr>
+    </table>
+</div>

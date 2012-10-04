@@ -5,7 +5,7 @@ body {
 	background-color: #ededed;
 	// font-size: 62.5%;
 }
-.destinations {
+.destination-services {
 	$padTop: 4px;
 	$padSides: 6px;
 	$fieldHeight: 30px;
@@ -15,7 +15,6 @@ body {
 	$rootMargin: 10px;
 	$androidInputMargin: 30px;
 	$inputBorderRadius: 10px;
-	$headerTopMarginOverlay: $rootMargin * -1;
 	$errorColor: #C00;
 
 	// Resest if base font percentage is set to 62.5%
@@ -24,7 +23,7 @@ body {
     -webkit-focus-ring-color: rgba(0, 0, 0, 0);	
     -webkit-appearance: none;
 
-    padding-top: $rootMargin * 10;
+    padding-top: $rootMargin * 4;
 
     .cloak { visibility: hidden; }
     &.ready {
@@ -103,19 +102,19 @@ body {
     }
 
 	form {
-		&[name="destinations"] {
+		&.destinations {
 			position: absolute;
 			width: 100%;
-			margin-top: $headerTopMarginOverlay;
+			padding: 0;
+			margin: 0;
 			&[data-state="off"] {
+				margin-top: $rootMargin * -1;
 				opacity: $opacityOff;
 				.layer {
 					display: none;
 				}
 			}
 			&[data-state="on"] {
-				margin-top: 0;
-				top: 0;
 				.layer {
 					display: block;
 				}

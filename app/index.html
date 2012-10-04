@@ -28,89 +28,31 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->        
-        <div id="viewporter">            
-            <div class="destinations"
+        <div id="viewporter" 
+             data-destserv-class="destination-services"
+             ng-app>            
+            <div class="destination-services"
+                 data-value=""
                  data-placeholder="Use current location"
                  data-placeholder-layer="Airport, city, or zip"
-                 data-value=""
                  data-copy-cancel="Cancel"
-                 data-input-id="location"
-                 ng-controller="DestServCtrl"
-                 ng-app>                    
-                    <ng:include src="'templates/destlayer.html'"></ng:include>
+                 data-layer-form="destinations"
+                 data-input-form="searchForm"
+                 data-input-name="location"
+                 ng-controller="DestServCtrl">
                     <form action=""
                           class="search"
-                          data-target="location"
-                          data-key="current location"
-                          onsubmit="var hasGeolocation, errors, hasThem;
-                                hasGeolocation = navigator.geolocation;
-                                errors = $('.errors',this)[0];
-                                errors.innerHTML = '';
-                                hasThem = false;
-                                $(errors.parentNode.parentNode).removeClass('errorEndDate');
-                                $(errors.parentNode.parentNode).removeClass('errorLocation');
-                                $(errors.parentNode.parentNode).removeClass('hasErrors');
-                                if(this.location.value.length<3){
-                                    errors.innerHTML += '<p>Minimum 3 characters required to perform successful search.</p>';
-                                    $(errors).addClass('hasThem');
-                                    hasThem = true;
-                                    $(errors.parentNode.parentNode).addClass('errorLocation');
-                                }
-                                if(new Date(this.endDate.value)<=new Date(this.startDate.value)){
-                                    errors.innerHTML += '<p>Check-out date is not valid. The check-out date must be after the check-in date.</p>';
-                                    $(errors).addClass('hasThem');
-                                    hasThem = true;
-                                    $(errors.parentNode.parentNode).addClass('errorEndDate');
-                                }
-                                if (hasThem) {
-                                    $(errors.parentNode.parentNode).addClass('hasErrors');
-                                    return false;
-                                }
-                                if(hasGeolocation){
-                                    var self = this,
-                                        location=$('#'+self.getAttribute('data-target'))[0],
-                                        isLocSearch=location.value.indexOf(self.getAttribute('data-key'))!=-1;
-                                    if(isLocSearch){
-                                        navigator.geolocation.getCurrentPosition(function(position){
-                                            var coords = [
-                                                    position.coords.latitude,
-                                                    position.coords.longitude
-                                                ]                                        
-                                                location.value=coords;
-                                                location.form.submit();
-                                            },function(error){
-                                                var mssg = '';
-                                                switch(error.code)  {
-                                                  case error.PERMISSION_DENIED:
-                                                    mssg = 'User denied the request for Geolocation.';
-                                                    break;
-                                                  case error.POSITION_UNAVAILABLE:
-                                                    mssg = 'Location information is unavailable.';
-                                                    break;
-                                                  case error.TIMEOUT:
-                                                    mssg = 'The request to get user location timed out.';
-                                                    break;
-                                                  case error.UNKNOWN_ERROR:
-                                                    mssg = 'An unknown error occurred.';
-                                                    break;
-                                                }
-                                                alert(mssg);
-                                            }
-                                        );
-                                    } else {
-                                        location.form.submit();
-                                    }
-                                }
-                                return false;
-                                ">
+                          data-location-key="current location"
+                          name="searchForm"
+                          ng-submit="form.submit()"
+                          onsubmit="return false">
+                        <div class="errors" title="Please correct the following"></div>
                         <div class="field location">
                             <label>Location</label>
                             <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
                         </div>
-                        <div class="errors" title="Please correct the following"></div>
                         <input type="hidden" 
                                name="location"
-                               id="location"
                                value="">
                         <div class="field startDate">
                             <label>Start</label>
@@ -125,7 +67,13 @@
                         <input name="numChildren" type="hidden" value="0">
                         <button style="margin: 10px;">search</button>
                     </form>
-            </div>     
+                    <form class="destinations"
+                          name="destinations" 
+                          data-state="{{layer.state}}"
+                          ng-submit="layer.submit($event)">
+                            <ng:include src="'templates/destlayer.html'"></ng:include>
+                    </form>
+            </div>    
         </div>
 
         <script src="scripts/vendor/jquery.min.js"></script>
