@@ -12,7 +12,7 @@ function DestServCtrl($scope, $http, $rootElement) {
             func();
         }, delay);
     }
-    
+
     $scope.form = {
         placeholder: 'data-placeholder',
         value: null,
@@ -154,17 +154,15 @@ function DestServCtrl($scope, $http, $rootElement) {
             e.stopPropagation();
         },
         dismiss: function(e) {
-            $scope.layer.state = 'off';
             e.preventDefault();
             e.stopPropagation();
-            $scope.layer.position('off');
+            $scope.layer.refresh('off');
         },
         show: function(e) {
-            $scope.layer.state = 'on';
             $scope.layer.form.field.focus();
             e.preventDefault();
             e.stopPropagation();
-            $scope.layer.position('on');
+            $scope.layer.refresh('on');
         },
         position: function(type) {
             var top, field;
@@ -173,7 +171,6 @@ function DestServCtrl($scope, $http, $rootElement) {
             if ( type === 'off' ) {
                 $scope.defer(function(){
                     $scope.layer.form.style.top = top + 'px'; 
-                    window.viewporter.refresh();
                 },1);
             } else {
                 $scope.defer(function(){
@@ -181,18 +178,26 @@ function DestServCtrl($scope, $http, $rootElement) {
                 },1);
             }
         },
-        refresh: function(){
-            if ($scope.layer.state === 'off') {
-                $scope.layer.position('off');
+        refresh: function(position){
+            if ( position ) {
+                $scope.layer.state = position;
+                $scope.layer.position(position);
             } else {
-                $scope.layer.position('on');
+                if ($scope.layer.state === 'off') {
+                    $scope.layer.position('off');
+                } else {
+                    $scope.layer.position('on');
+                }
+            }
+            if ( window['viewporter'] ) {
+                window.viewporter.refresh();
             }
         },
         submit: function(e) {
             $scope.layer.form.field.blur();
             $scope.layer.state = 'off';
-            $scope.layer.position('off');
             $scope.form.update($scope.layer.search.term);
+            $scope.layer.refresh();
         },
         doClear: function() {
             clearTimeout($scope.layer.search.timeout);
