@@ -32,6 +32,8 @@
              data-destserv-class="destination-services"
              ng-app>            
             <div class="destination-services"
+                 id="topForm"
+                 data-name="h"
                  data-value=""
                  data-placeholder="Use current location"
                  data-placeholder-layer="Airport, city, or zip"
@@ -44,12 +46,12 @@
                           class="search"
                           data-location-key="current location"
                           name="searchForm"
-                          ng-submit="form.submit()"
+                          ng-submit="h.form.submit()"
                           onsubmit="return false">
                         <div class="errors" title="Please correct the following"></div>
                         <div class="field location">
                             <label>Location</label>
-                            <span class="input"><span class="cloak">{{form.value || form.placeholder}}</span></span>
+                            <span class="input"><span class="cloak">{{h.form.value || h.form.placeholder}}</span></span>
                         </div>
                         <input type="hidden" 
                                name="location"
@@ -69,11 +71,136 @@
                     </form>
                     <form class="destinations"
                           name="destinations" 
-                          data-state="{{layer.state}}"
-                          ng-submit="layer.submit($event)">
-                            <ng:include src="'templates/destlayer.html'"></ng:include>
+                          data-state="{{h.layer.state}}"
+                          ng-submit="h.layer.submit($event)">
+                            <header ng-click="h.layer.clickHeader($event)"
+                                    class="cloak">
+                                <b  class="cap"
+                                    data-ui="cap">&nbsp;</b><input 
+                                    type="text" 
+                                    placeholder="{{h.layer.search.placeholder}}"
+                                    autocomplete="off" 
+                                    autocorrect="off"
+                                    name="field"
+                                    data-ui="field"
+                                    ng-model="h.layer.search.term"> 
+                                <i  class="icon-clear"
+                                    data-ui="clear"></i>
+                                <b  class="cancel"
+                                    data-ui="cancel">{{h.layer.copy.cancel}}</b>
+                            </header>
+                            <div    class="layer cloak"
+                                    data-ui="layer"
+                                    ng-click="h.layer.clickLayer($event)">
+                                <table>
+                                    <tr>
+                                        <td data-ui="location"
+                                            data-value="{{h.form.placeholder}}"
+                                            class="location-true">
+                                            <i  class="icon-location"></i>
+                                            {{h.form.placeholder}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="city in h.layer.search.results.capped">
+                                        <td data-ui="city"
+                                            data-value="{{city.v}}"
+                                            class="isAirport-{{city.airportEntry}}">
+                                            <i  class="icon-airport"></i>
+                                            {{city.v}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                     </form>
-            </div>    
+            </div>
+
+
+
+            <div class="destination-services"
+                 id="bottomForm"
+                 data-name="c"
+                 data-value=""
+                 data-placeholder="Use current location"
+                 data-placeholder-layer="Airport, city, or zip"
+                 data-copy-cancel="Cancel"
+                 data-layer-form="cDestinations"
+                 data-input-form="cSearchForm"
+                 data-input-name="location"
+                 ng-controller="DestServCtrl">
+                    <form action=""
+                          class="search"
+                          data-location-key="current location"
+                          name="cSearchForm"
+                          ng-submit="c.form.submit()"
+                          onsubmit="return false">
+                        <div class="errors" title="Please correct the following"></div>
+                        <div class="field location">
+                            <label>Location</label>
+                            <span class="input"><span class="cloak">{{c.form.value || c.form.placeholder}}</span></span>
+                        </div>
+                        <input type="hidden" 
+                               name="location"
+                               value="">
+                        <div class="field startDate">
+                            <label>Start</label>
+                            <input class="input" name="startDate" type="text" value="10/20/2012">
+                        </div>
+                        <div class="field endDate">
+                            <label>End</label>
+                            <input class="input" name="endDate" type="text" value="10/21/2012">
+                        </div>
+                        <input name="numRooms" type="hidden" value="1">
+                        <input name="numAdults" type="hidden" value="2">
+                        <input name="numChildren" type="hidden" value="0">
+                        <button style="margin: 10px;">search</button>
+                    </form>
+                    <form class="destinations"
+                          name="cDestinations" 
+                          data-state="{{c.layer.state}}"
+                          ng-submit="c.layer.submit($event)">
+                            <header ng-click="c.layer.clickHeader($event)"
+                                    class="cloak">
+                                <b  class="cap"
+                                    data-ui="cap">&nbsp;</b><input 
+                                    type="text" 
+                                    placeholder="{{c.layer.search.placeholder}}"
+                                    autocomplete="off" 
+                                    autocorrect="off"
+                                    name="field"
+                                    data-ui="field"
+                                    ng-model="c.layer.search.term"> 
+                                <i  class="icon-clear"
+                                    data-ui="clear"></i>
+                                <b  class="cancel"
+                                    data-ui="cancel">{{c.layer.copy.cancel}}</b>
+                            </header>
+                            <div    class="layer cloak"
+                                    data-ui="layer"
+                                    ng-click="c.layer.clickLayer($event)">
+                                <table>
+                                    <tr>
+                                        <td data-ui="location"
+                                            data-value="{{c.form.placeholder}}"
+                                            class="location-true">
+                                            <i  class="icon-location"></i>
+                                            {{c.form.placeholder}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="city in c.layer.search.results.capped">
+                                        <td data-ui="city"
+                                            data-value="{{city.v}}"
+                                            class="isAirport-{{city.airportEntry}}">
+                                            <i  class="icon-airport"></i>
+                                            {{city.v}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                    </form>
+            </div>
+
+
+
         </div>
 
         <script src="scripts/vendor/jquery.min.js"></script>
